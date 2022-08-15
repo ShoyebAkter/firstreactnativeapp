@@ -10,6 +10,7 @@ const GetData: FC = () => {
         Array<IDataType>
     >([]);
 
+    
     useEffect(() => {
         const showData = async (): Promise<void> => {
             const querySnapshot = await getDocs(collection(db, "users"));
