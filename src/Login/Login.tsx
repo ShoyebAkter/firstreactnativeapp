@@ -1,10 +1,12 @@
 import { View, Text, Button, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { auth } from '../../firebase';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ILoginType } from '../../types/datatypes';
 
 const Login = ({navigation}:any) => {
+    const [email,setEmail]=useState<string>("")
+    const [password,setPassword]=useState<string>("")
     const [
         signInWithEmailAndPassword,
         user,
@@ -21,17 +23,11 @@ const Login = ({navigation}:any) => {
       if (loading) {
         return <p>Loading...</p>;
       }
-    //   const handleLogin = async (event: React.SyntheticEvent): Promise<void> => {
-
-    //     event.preventDefault();
-    //     const target = event.target as typeof event.target & ILoginType;
-    //     const email: string = target.email.value;
-    //     const password: string = target.password.value;
-    
-    //     await signInWithEmailAndPassword(email, password);
-    //     console.log(user);
-    //     // 
-    //   }
+      const handleLogin = async (): Promise<void> => {
+        await signInWithEmailAndPassword(email, password);
+        navigation.navigate("Home")
+        // 
+      }
   return (
     <View>
       <Text>Login</Text>
@@ -42,6 +38,8 @@ const Login = ({navigation}:any) => {
                     borderWidth: 1
                 }}
                 defaultValue="Enter your email!"
+                value={email}
+                onChangeText={(data)=>setEmail(data)}
             />
             <TextInput
                 style={{
@@ -50,11 +48,11 @@ const Login = ({navigation}:any) => {
                     borderWidth: 1
                 }}
                 defaultValue="password"
+                value={password}
+                onChangeText={(data)=>setPassword(data)}
             />
             <Button
-                onPress={() => {
-                    navigation.navigate("Home");
-                }}
+            onPress={handleLogin}
                 title={"Login"}
             />
             <Text>Don't have an account?
