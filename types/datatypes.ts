@@ -8,3 +8,7 @@ export interface ISignUpType{
     email:string,
     password:string
 }
+export interface ILoginType{
+    email:string,
+    password:string
+}

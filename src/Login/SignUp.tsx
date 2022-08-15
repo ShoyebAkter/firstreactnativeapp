@@ -69,8 +69,16 @@ const SignUp = ({ navigation}:any) => {
                 onPress={() => {
                     navigation.navigate("Home");
                 }}
+                title={"SignUp"}
+            />
+            <Text>Already have an account?
+            <Button
+                onPress={() => {
+                    navigation.navigate("login");
+                }}
                 title={"Login"}
             />
+                 </Text>
         </View>
     )
 }
