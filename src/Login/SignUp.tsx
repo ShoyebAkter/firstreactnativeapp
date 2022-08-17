@@ -1,11 +1,14 @@
 import { View, Text, TextInput, Button } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { auth } from '../../firebase';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { ISignUpType } from '../../types/datatypes';
 
 
 const SignUp = ({ navigation}:any) => {
+    const [name,setName]=useState<string>("");
+    const [email,setEmail]=useState<string>("")
+    const [password,setPassword]=useState<string>("")
     const [
         createUserWithEmailAndPassword,
         user,
@@ -16,28 +19,21 @@ const SignUp = ({ navigation}:any) => {
 
     let errorElement;
     if (error) {
-        errorElement = <div>
-            <p>Error: {error.message}</p>
-        </div>
+        errorElement = <Text>
+            <Text>Error: {error.message}</Text>
+        </Text>
     }
     if (loading) {
-        return <p>Loading...</p>;
+        return <Text>Loading...</Text>;
     }
-    // const handleRegister = async (event: React.SyntheticEvent): Promise<void> => {
+    const handleRegister = async (): Promise<void> => {
 
-    //     event.preventDefault();
-
-    //     const target = event.target as typeof event.target & ISignUpType;
-    //     const name: string = target.name.value;
-    //     const email: string = target.email.value;
-    //     const password: string = target.password.value;
-    //     console.log(user);
-    //     // await sendEmailVerification();
-    //     //       alert('Sent email');
-
-    //     await createUserWithEmailAndPassword(email, password);
-    //     await updateProfile({ displayName: name });
-    // }
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+    }
+    if(user){
+        navigation.navigate("login");
+    }
     return (
         <View>
             <Text>SignUp</Text>
@@ -48,6 +44,8 @@ const SignUp = ({ navigation}:any) => {
                     borderWidth: 1
                 }}
                 defaultValue="Your Name!"
+                value={name}
+                onChangeText={(data) => setName(data)}
             />
             <TextInput
                 style={{
@@ -56,6 +54,8 @@ const SignUp = ({ navigation}:any) => {
                     borderWidth: 1
                 }}
                 defaultValue="Enter your email!"
+                value={email}
+                onChangeText={(data) => setEmail(data)}
             />
             <TextInput
                 style={{
@@ -64,10 +64,11 @@ const SignUp = ({ navigation}:any) => {
                     borderWidth: 1
                 }}
                 defaultValue="password"
+                onChangeText={(data) => setPassword(data)}
             />
             <Button
                 onPress={() => {
-                    navigation.navigate("Home");
+                    handleRegister()
                 }}
                 title={"SignUp"}
             />
