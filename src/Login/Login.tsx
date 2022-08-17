@@ -1,36 +1,41 @@
-import { View, Text, Button, TextInput } from 'react-native'
+import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import { auth } from '../../firebase';
+import { app, auth } from '../../firebase';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ILoginType } from '../../types/datatypes';
 
-const Login = ({navigation}:any) => {
-    const [email,setEmail]=useState<string>("")
-    const [password,setPassword]=useState<string>("")
+const Login = ({ navigation }: any) => {
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
-      ] = useSignInWithEmailAndPassword(auth);
-      let errorText;
-      // console.log(user);
-      if (error) {
-        errorText = <div>
-          <p className='text-danger'>Error: {error?.message}</p>
-        </div>
-      }
-      if (loading) {
-        return <p>Loading...</p>;
-      }
-      const handleLogin = async (): Promise<void> => {
+    ] = useSignInWithEmailAndPassword(auth);
+
+    let errorText;
+    // console.log(user);
+    if (error) {
+        errorText = <Text>
+            <Text>Error: {error?.message}</Text>
+        </Text>
+    }
+    if (loading) {
+        return <Text>Loading...</Text>;
+    }
+
+    const handleLogin = async (): Promise<void> => {
+        console.log(email, password)
         await signInWithEmailAndPassword(email, password);
-        navigation.navigate("Home")
-        // 
-      }
-  return (
-    <View>
-      <Text>Login</Text>
+    }
+    if(user){
+        navigation.navigate('home')
+    }
+
+    return (
+        <View>
+            <Text>Login</Text>
             <TextInput
                 style={{
                     height: 40,
@@ -39,7 +44,7 @@ const Login = ({navigation}:any) => {
                 }}
                 defaultValue="Enter your email!"
                 value={email}
-                onChangeText={(data)=>setEmail(data)}
+                onChangeText={(data) => setEmail(data)}
             />
             <TextInput
                 style={{
@@ -49,22 +54,39 @@ const Login = ({navigation}:any) => {
                 }}
                 defaultValue="password"
                 value={password}
-                onChangeText={(data)=>setPassword(data)}
+                onChangeText={(data) => setPassword(data)}
             />
             <Button
-            onPress={handleLogin}
-                title={"Login"}
+                color="#3740FE"
+                title="Signin"
+                onPress={() => handleLogin()}
             />
+            {errorText}
             <Text>Don't have an account?
-            <Button
-                onPress={() => {
-                    navigation.navigate("signup");
-                }}
-                title={"Create an account"}
-            />
-                 </Text>
-    </View>
-  )
+                <Button
+                    onPress={() => {
+                        navigation.navigate("signup");
+                    }}
+                    title={"Create an account"}
+                />
+            </Text>
+        </View>
+    )
 }
-
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 10
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "#DDDDDD",
+        padding: 10
+    },
+    countContainer: {
+        alignItems: "center",
+        padding: 10
+    }
+});
 export default Login

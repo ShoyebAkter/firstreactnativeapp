@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>962289027598-bl76h1u35kmmuovtjng4mi835uvn10cm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.962289027598-bl76h1u35kmmuovtjng4mi835uvn10cm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCciTmLZ1fg_AT4gnGRlUWj_V32oMjEPmw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>962289027598</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>mynativeapp</string>
+	<key>PROJECT_ID</key>
+	<string>loginpage-88825</string>
+	<key>STORAGE_BUCKET</key>
+	<string>loginpage-88825.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:962289027598:ios:e4e1487fda79d443a94a5f</string>
+</dict>
+</plist>
