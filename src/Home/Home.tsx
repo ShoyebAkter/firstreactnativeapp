@@ -20,12 +20,6 @@ const Home: FC = ({ navigation }: any) => {
         :
         <View>
           <Text>Create An account.</Text>
-        <Button
-                onPress={() => {
-                    navigation.replace("login");
-                }}
-                title={"Login"}
-            />
         </View>
         }
     </View>
