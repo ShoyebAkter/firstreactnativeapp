@@ -32,7 +32,7 @@ const SignUp = ({ navigation}:any) => {
         await updateProfile({ displayName: name });
     }
     if(user){
-        navigation.navigate("login");
+        navigation.replace("login");
     }
     return (
         <View>
@@ -76,7 +76,7 @@ const SignUp = ({ navigation}:any) => {
             <Text>Already have an account?
             <Button
                 onPress={() => {
-                    navigation.navigate("login");
+                    navigation.replace("login");
                 }}
                 title={"Login"}
             />

@@ -30,7 +30,7 @@ const Login = ({ navigation }: any) => {
         await signInWithEmailAndPassword(email, password);
     }
     if(user){
-        navigation.navigate('home')
+        navigation.replace('home')
     }
 
     return (
@@ -65,7 +65,7 @@ const Login = ({ navigation }: any) => {
             {errorText}
                 <Button
                     onPress={() => {
-                        navigation.navigate("signup");
+                        navigation.replace("signup");
                     }}
                     title="SignUp"
                 />
