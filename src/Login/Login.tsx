@@ -18,7 +18,7 @@ const Login = ({ navigation }: any) => {
     // console.log(user);
     if (error) {
         errorText = <Text>
-            <Text>Error: {error?.message}</Text>
+            <Text style={styles.red}>Error: {error?.message}</Text>
         </Text>
     }
     if (loading) {
@@ -56,20 +56,19 @@ const Login = ({ navigation }: any) => {
                 value={password}
                 onChangeText={(data) => setPassword(data)}
             />
+            
             <Button
-                color="#3740FE"
+                color="#f194ff"
                 title="Signin"
                 onPress={() => handleLogin()}
             />
             {errorText}
-            <Text>Don't have an account?
                 <Button
                     onPress={() => {
                         navigation.navigate("signup");
                     }}
-                    title={"Create an account"}
+                    title="SignUp"
                 />
-            </Text>
         </View>
     )
 }
@@ -80,13 +79,27 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     button: {
-        alignItems: "center",
-        backgroundColor: "#DDDDDD",
-        padding: 10
-    },
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'black',
+      },
+      text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+      },
     countContainer: {
         alignItems: "center",
         padding: 10
+    },
+    red:{
+        color:"red"
     }
 });
 export default Login
