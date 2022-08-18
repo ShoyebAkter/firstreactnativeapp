@@ -1,13 +1,33 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React, { FC } from 'react'
-import { Text, View } from 'react-native'
+import { signOut } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { Button, Text, View } from 'react-native'
+import { auth } from '../../firebase'
 import GetData from '../GetData/GetData'
-import Navbar from './Navbar'
+import Login from '../Login/Login'
 
-const Home:FC=()=> {
+const Home: FC = ({ navigation }: any) => {
+  const [user, loading, error] = useAuthState(auth)
   return (
     <View>
-        <Text>Home</Text>
-        <GetData/>
+      {user ?
+        <View>
+          <Text>{user.displayName}</Text>
+          <GetData />
+          
+        </View>
+        :
+        <View>
+          <Text>Create An account.</Text>
+        <Button
+                onPress={() => {
+                    navigation.replace("login");
+                }}
+                title={"Login"}
+            />
+        </View>
+        }
     </View>
   )
 }

@@ -73,14 +73,12 @@ const SignUp = ({ navigation}:any) => {
                 title={"SignUp"}
             />
             {errorElement}
-            <Text>Already have an account?
             <Button
                 onPress={() => {
                     navigation.replace("login");
                 }}
                 title={"Login"}
             />
-                 </Text>
         </View>
     )
 }

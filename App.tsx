@@ -8,17 +8,29 @@ import SignUp from './src/Login/SignUp';
 import Login from './src/Login/Login';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Logout from './src/Login/Logout';
+import { signOut } from 'firebase/auth';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [user, loading, error] = useAuthState(auth)
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='signup'>
+      <Stack.Navigator initialRouteName='home'>
         <Stack.Screen name="signup" component={SignUp} />
-        <Stack.Screen name="home" component={Home}/>
+        <Stack.Screen name="home" component={Home} options={{
+          headerRight:()=>(
+            <Button
+            onPress={()=>signOut(auth)}
+            title="Logout"
+            color="#00cc00"
+            />
+          )
+        }}/>
         <Stack.Screen name="login" component={Login} />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }
