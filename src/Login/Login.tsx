@@ -1,13 +1,12 @@
 import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { app, auth } from '../../firebase';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-
-
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [signInWithGoogle, Guser, Gloading] = useSignInWithGoogle(auth)
     const [
         signInWithEmailAndPassword,
         user,
@@ -15,18 +14,17 @@ const Login = ({ navigation }: any) => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const handleLogin = async(): Promise<void> => {
+    const handleLogin = async (): Promise<void> => {
         // console.log(email, password)
-        await signInWithEmailAndPassword(email, password).then(()=>{
-            if(user){
-                navigation.replace('home')
-            }
-        })
+        await signInWithEmailAndPassword(email, password)
     }
-    
-    if (loading) {
+    if (user || Guser) {
+        navigation.replace('home')
+    }
+
+    if (loading || Gloading) {
         return <Text>Loading...</Text>
-        
+
     }
 
     return (
@@ -37,7 +35,8 @@ const Login = ({ navigation }: any) => {
                     height: 40,
                     margin: 10,
                     borderColor: 'gray',
-                    borderWidth: 2
+                    borderWidth: 2,
+                    borderRadius:5
                 }}
                 placeholder="Enter your email!"
                 value={email}
@@ -48,26 +47,36 @@ const Login = ({ navigation }: any) => {
                     height: 40,
                     margin: 10,
                     borderColor: 'gray',
-                    borderWidth: 2
+                    borderWidth: 2,
+                    borderRadius:5
                 }}
                 secureTextEntry={true}
                 placeholder="password"
                 value={password}
                 onChangeText={(data) => setPassword(data)}
             />
-
-            <Button
-                title="Login"
-                onPress={() => {handleLogin()}}
-            />
-            {error &&
-                <Text>
-                    <Text style={styles.red}>Error: {error?.message}</Text>
-                </Text>}
-            <Button
-                onPress={() => navigation.replace("signup")}
-                title="SignUp"
-            />
+            <View style={styles.button}>
+                    <Button
+                        title="Login"
+                        onPress={() => { handleLogin() }}
+                    />
+                </View>
+                {error &&
+                    <Text>
+                        <Text style={styles.red}>Error: {error?.message}</Text>
+                    </Text>}
+                <View style={styles.button}>
+                    <Button
+                        onPress={() => navigation.replace("signup")}
+                        title="SignUp"
+                    />
+                </View>
+                <View style={styles.button}>
+                    <Button
+                        onPress={() => {signInWithGoogle()}}
+                        title="Google Sign In"
+                    />
+                </View>
         </View>
     )
 }
@@ -75,16 +84,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: 10
+        alignItems:"center"
     },
     button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        backgroundColor: 'black',
+        height: 40,
+        width: 200,
+        marginLeft: 100,
+        backgroundColor: "#7fff00",
+        borderRadius: 5,
+        justifyContent: "center",
+        marginBottom: 5
     },
     text: {
         fontSize: 16,

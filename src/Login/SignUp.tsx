@@ -1,15 +1,13 @@
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { auth } from '../../firebase';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
-
-
 
 const SignUp = ({ navigation }: any) => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    
+
     const [
         createUserWithEmailAndPassword,
         user,
@@ -21,9 +19,9 @@ const SignUp = ({ navigation }: any) => {
     if (loading) {
         return <Text>Loading...</Text>;
     }
-    const handleRegister =  (): void => {
-         createUserWithEmailAndPassword(email, password);
-         updateProfile({ displayName: name });
+    const handleRegister = (): void => {
+        createUserWithEmailAndPassword(email, password);
+        updateProfile({ displayName: name });
     }
     if (user) {
         navigation.replace("login");
@@ -36,7 +34,8 @@ const SignUp = ({ navigation }: any) => {
                     height: 40,
                     margin: 5,
                     borderColor: 'gray',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    borderRadius: 5
                 }}
                 placeholder="Your Name!"
                 onChangeText={(data) => setName(data)}
@@ -46,7 +45,8 @@ const SignUp = ({ navigation }: any) => {
                     height: 40,
                     margin: 5,
                     borderColor: 'gray',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    borderRadius: 5
                 }}
                 placeholder="Enter your email!"
                 onChangeText={(data) => setEmail(data)}
@@ -56,31 +56,48 @@ const SignUp = ({ navigation }: any) => {
                     height: 40,
                     margin: 5,
                     borderColor: 'gray',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    borderRadius: 5
                 }}
                 secureTextEntry={true}
                 placeholder="password"
                 onChangeText={(data) => setPassword(data)}
             />
-            <Button
-                onPress={() => {
-                    handleRegister()
-                }}
-                title={"SignUp"}
-            />
+            <View style={styles.button}>
+                <Button
+                    onPress={() => {
+                        handleRegister()
+                    }}
+                    title={"SignUp"}
+                />
+            </View>
             {error &&
                 <Text>
-                    <Text style={{color:"red"}}>Error: {error.message}</Text>
+                    <Text style={{ color: "red" }}>Error: {error.message}</Text>
                 </Text>}
-            <Button
+            <View style={styles.button}>
+                <Button
 
-                onPress={() => {
-                    navigation.replace("login");
-                }}
-                title="Login"
-            />
+                    onPress={() => {
+                        navigation.replace("login");
+                    }}
+                    title="Login"
+                />
+            </View>
         </View>
     )
 }
 
 export default SignUp
+
+const styles = StyleSheet.create({
+    button: {
+        height: 40,
+        width: 200,
+        marginLeft: 100,
+        backgroundColor: "#7fff00",
+        borderRadius: 5,
+        justifyContent: "center",
+        marginBottom: 5
+    }
+})
