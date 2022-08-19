@@ -60,7 +60,7 @@ const Login = ({ navigation }: any) => {
             />
             
             <Button 
-                title="Signin"
+                title="Login"
                 onPress={() => handleLogin()}
             />
             {errorText}
