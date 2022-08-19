@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { app, auth } from '../../firebase';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
+
+
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -13,32 +15,27 @@ const Login = ({ navigation }: any) => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    let errorText;
-    // console.log(user);
-    if (error) {
-        errorText = <Text>
-            <Text style={styles.red}>Error: {error?.message}</Text>
-        </Text>
+    const handleLogin = async(): Promise<void> => {
+        // console.log(email, password)
+        await signInWithEmailAndPassword(email, password).then(()=>{
+            if(user){
+                navigation.replace('home')
+            }
+        })
     }
+    
     if (loading) {
-        return <Text>Loading...</Text>;
-    }
-
-    const handleLogin = async (): Promise<void> => {
-        console.log(email, password)
-        await signInWithEmailAndPassword(email, password);
-    }
-    if(user){
-        navigation.replace('home')
+        return <Text>Loading...</Text>
+        
     }
 
     return (
         <View>
-            <Text style={{textAlign:"center",fontSize:20}}>Please Login</Text>
+            <Text style={{ textAlign: "center", fontSize: 20 }}>Please Login</Text>
             <TextInput
                 style={{
                     height: 40,
-                    margin:10,
+                    margin: 10,
                     borderColor: 'gray',
                     borderWidth: 2
                 }}
@@ -49,7 +46,7 @@ const Login = ({ navigation }: any) => {
             <TextInput
                 style={{
                     height: 40,
-                    margin:10,
+                    margin: 10,
                     borderColor: 'gray',
                     borderWidth: 2
                 }}
@@ -58,18 +55,19 @@ const Login = ({ navigation }: any) => {
                 value={password}
                 onChangeText={(data) => setPassword(data)}
             />
-            
-            <Button 
+
+            <Button
                 title="Login"
-                onPress={() => handleLogin()}
+                onPress={() => {handleLogin()}}
             />
-            {errorText}
-                <Button
-                    onPress={() => {
-                        navigation.replace("signup");
-                    }}
-                    title="SignUp"
-                />
+            {error &&
+                <Text>
+                    <Text style={styles.red}>Error: {error?.message}</Text>
+                </Text>}
+            <Button
+                onPress={() => navigation.replace("signup")}
+                title="SignUp"
+            />
         </View>
     )
 }
@@ -87,20 +85,20 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         elevation: 3,
         backgroundColor: 'black',
-      },
-      text: {
+    },
+    text: {
         fontSize: 16,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'white',
-      },
+    },
     countContainer: {
         alignItems: "center",
         padding: 10
     },
-    red:{
-        color:"red"
+    red: {
+        color: "red"
     }
 });
 export default Login

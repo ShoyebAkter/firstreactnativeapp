@@ -8,7 +8,7 @@ const GetData: FC = () => {
     const [data, setData] = useState<
         Array<IDataType>
     >([]);
-
+    
     
     useEffect(() => {
         const showData = async (): Promise<void> => {

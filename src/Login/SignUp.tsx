@@ -1,14 +1,15 @@
 import { View, Text, TextInput, Button } from 'react-native'
 import React, { useState } from 'react'
 import { auth } from '../../firebase';
-import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 
 
 
-const SignUp = ({ navigation}:any) => {
-    const [name,setName]=useState<string>("");
-    const [email,setEmail]=useState<string>("")
-    const [password,setPassword]=useState<string>("")
+const SignUp = ({ navigation }: any) => {
+    const [name, setName] = useState<string>("");
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+    
     const [
         createUserWithEmailAndPassword,
         user,
@@ -17,52 +18,43 @@ const SignUp = ({ navigation}:any) => {
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
 
-    let errorElement;
-    if (error) {
-        errorElement = <Text>
-            <Text>Error: {error.message}</Text>
-        </Text>
-    }
     if (loading) {
         return <Text>Loading...</Text>;
     }
-    const handleRegister = async (): Promise<void> => {
-
-        await createUserWithEmailAndPassword(email, password);
-        await updateProfile({ displayName: name });
+    const handleRegister =  (): void => {
+         createUserWithEmailAndPassword(email, password);
+         updateProfile({ displayName: name });
     }
-    if(user){
+    if (user) {
         navigation.replace("login");
     }
     return (
         <View>
-            <Text style={{textAlign:"center"}}>Please SignUp</Text>
+            <Text style={{ textAlign: "center" }}>Please SignUp</Text>
             <TextInput
                 style={{
                     height: 40,
-                    margin:5,
+                    margin: 5,
                     borderColor: 'gray',
                     borderWidth: 1
                 }}
                 placeholder="Your Name!"
-                value={name}
                 onChangeText={(data) => setName(data)}
             />
             <TextInput
                 style={{
                     height: 40,
-                    margin:5,
+                    margin: 5,
                     borderColor: 'gray',
                     borderWidth: 1
                 }}
                 placeholder="Enter your email!"
-                value={email}
                 onChangeText={(data) => setEmail(data)}
             />
             <TextInput
                 style={{
                     height: 40,
-                    margin:5,
+                    margin: 5,
                     borderColor: 'gray',
                     borderWidth: 1
                 }}
@@ -76,7 +68,10 @@ const SignUp = ({ navigation}:any) => {
                 }}
                 title={"SignUp"}
             />
-            {errorElement}
+            {error &&
+                <Text>
+                    <Text style={{color:"red"}}>Error: {error.message}</Text>
+                </Text>}
             <Button
 
                 onPress={() => {
