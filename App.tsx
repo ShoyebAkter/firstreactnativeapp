@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import GetData from './src/GetData/GetData';
 import Home from './src/Home/Home';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -8,7 +6,6 @@ import SignUp from './src/Login/SignUp';
 import Login from './src/Login/Login';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { signOut } from 'firebase/auth';
 
 export default function App() {
@@ -40,11 +37,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

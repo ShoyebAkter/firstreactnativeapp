@@ -26,7 +26,7 @@ const GetData: FC = () => {
             {
                 data.map((singleData, index) => {
                     return (
-                        <View style={{display:"flex"}} key={index}>
+                        <View key={index}>
                             <Image
                                 source={{ uri: singleData.image }}
                                 style={{width: 200, height: 75}}

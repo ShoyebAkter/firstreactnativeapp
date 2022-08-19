@@ -7,21 +7,10 @@ import { auth } from '../../firebase'
 import GetData from '../GetData/GetData'
 import Login from '../Login/Login'
 
-const Home: FC = ({ navigation }: any) => {
-  const [user, loading, error] = useAuthState(auth)
+const Home: FC = () => {
   return (
     <View>
-      {user ?
-        <View>
-          <Text>{user.displayName}</Text>
-          <GetData />
-          
-        </View>
-        :
-        <View>
-          <Text>Create An account.</Text>
-        </View>
-        }
+      <GetData />
     </View>
   )
 }

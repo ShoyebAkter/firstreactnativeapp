@@ -2,7 +2,6 @@ import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'rea
 import React, { useState } from 'react'
 import { app, auth } from '../../firebase';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { ILoginType } from '../../types/datatypes';
 
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState<string>("")
@@ -35,30 +34,32 @@ const Login = ({ navigation }: any) => {
 
     return (
         <View>
-            <Text>Login</Text>
+            <Text style={{textAlign:"center",fontSize:20}}>Please Login</Text>
             <TextInput
                 style={{
                     height: 40,
+                    margin:10,
                     borderColor: 'gray',
-                    borderWidth: 1
+                    borderWidth: 2
                 }}
-                defaultValue="Enter your email!"
+                placeholder="Enter your email!"
                 value={email}
                 onChangeText={(data) => setEmail(data)}
             />
             <TextInput
                 style={{
                     height: 40,
+                    margin:10,
                     borderColor: 'gray',
-                    borderWidth: 1
+                    borderWidth: 2
                 }}
-                defaultValue="password"
+                secureTextEntry={true}
+                placeholder="password"
                 value={password}
                 onChangeText={(data) => setPassword(data)}
             />
             
-            <Button
-                color="#f194ff"
+            <Button 
                 title="Signin"
                 onPress={() => handleLogin()}
             />

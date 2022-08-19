@@ -2,7 +2,7 @@ import { View, Text, TextInput, Button } from 'react-native'
 import React, { useState } from 'react'
 import { auth } from '../../firebase';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
-import { ISignUpType } from '../../types/datatypes';
+
 
 
 const SignUp = ({ navigation}:any) => {
@@ -36,34 +36,38 @@ const SignUp = ({ navigation}:any) => {
     }
     return (
         <View>
-            <Text>SignUp</Text>
+            <Text style={{textAlign:"center"}}>Please SignUp</Text>
             <TextInput
                 style={{
                     height: 40,
+                    margin:5,
                     borderColor: 'gray',
                     borderWidth: 1
                 }}
-                defaultValue="Your Name!"
+                placeholder="Your Name!"
                 value={name}
                 onChangeText={(data) => setName(data)}
             />
             <TextInput
                 style={{
                     height: 40,
+                    margin:5,
                     borderColor: 'gray',
                     borderWidth: 1
                 }}
-                defaultValue="Enter your email!"
+                placeholder="Enter your email!"
                 value={email}
                 onChangeText={(data) => setEmail(data)}
             />
             <TextInput
                 style={{
                     height: 40,
+                    margin:5,
                     borderColor: 'gray',
                     borderWidth: 1
                 }}
-                defaultValue="password"
+                secureTextEntry={true}
+                placeholder="password"
                 onChangeText={(data) => setPassword(data)}
             />
             <Button
@@ -74,10 +78,11 @@ const SignUp = ({ navigation}:any) => {
             />
             {errorElement}
             <Button
+
                 onPress={() => {
                     navigation.replace("login");
                 }}
-                title={"Login"}
+                title="Login"
             />
         </View>
     )
