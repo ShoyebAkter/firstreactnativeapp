@@ -2,6 +2,7 @@ import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'rea
 import React, { useState } from 'react'
 import { app, auth } from '../../firebase';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import Social from './Social';
 
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState<string>("")
@@ -71,12 +72,7 @@ const Login = ({ navigation }: any) => {
                         title="SignUp"
                     />
                 </View>
-                <View style={styles.button}>
-                    <Button
-                        onPress={() => {signInWithGoogle()}}
-                        title="Google Sign In"
-                    />
-                </View>
+                <Social/>
         </View>
     )
 }

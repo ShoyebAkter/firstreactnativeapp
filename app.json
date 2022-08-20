@@ -19,12 +19,20 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "bundleIdentifier": "mynativeapp",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "config":{
+         "googleSignIn":{
+          "reservedClientId": "com.googleusercontent.apps.962289027598-bl76h1u35kmmuovtjng4mi835uvn10cm"
+         }
+      }
     },
+    "plugins": ["@react-native-google-signin/google-signin"],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF",
+        "googleServicesFile": "./GoogleService-Info.plist"
       }
     },
     "web": {
