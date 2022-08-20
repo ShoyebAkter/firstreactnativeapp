@@ -19,15 +19,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "mynativeapp",
-      "googleServicesFile": "./GoogleService-Info.plist",
-      "config":{
-         "googleSignIn":{
-          "reservedClientId": "com.googleusercontent.apps.962289027598-bl76h1u35kmmuovtjng4mi835uvn10cm"
-         }
-      }
+      "bundleIdentifier": "example.expo.mygooglesignin"
+      
     },
-    "plugins": ["@react-native-google-signin/google-signin"],
+    "plugins": [["react-native-fbsdk-next",{
+      "appID":"816804259315268",
+      "clientToken":"8aa99bfcb2d6c6924695e93fe22e5ba9",
+      "displayName":"myfirstapp"
+    }]],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>962289027598-bl76h1u35kmmuovtjng4mi835uvn10cm.apps.googleusercontent.com</string>
+	<string>962289027598-jjrbq6jd7ersd6q9165bna1sebig8qe7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.962289027598-bl76h1u35kmmuovtjng4mi835uvn10cm</string>
+	<string>com.googleusercontent.apps.962289027598-jjrbq6jd7ersd6q9165bna1sebig8qe7</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCciTmLZ1fg_AT4gnGRlUWj_V32oMjEPmw</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>mynativeapp</string>
+	<string>example.expo.mygooglesignin</string>
 	<key>PROJECT_ID</key>
 	<string>loginpage-88825</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:962289027598:ios:e4e1487fda79d443a94a5f</string>
+	<string>1:962289027598:ios:147668d3071780c2a94a5f</string>
 </dict>
 </plist>
