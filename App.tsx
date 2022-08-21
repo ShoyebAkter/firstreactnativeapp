@@ -7,13 +7,16 @@ import Login from './src/Login/Login';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
-
+import Social from './src/Login/Social';
+import { createRef } from 'react';
+const navigationRef=createRef()
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [user, loading, error] = useAuthState(auth)
   
+  
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <Stack.Navigator initialRouteName='login'>
         <Stack.Screen name="signup" component={SignUp} />
         <Stack.Screen name="home" component={Home}
@@ -31,6 +34,7 @@ export default function App() {
           )
         })}/>
         <Stack.Screen name="login" component={Login} />
+        <Social/>
       </Stack.Navigator>
       
     </NavigationContainer>

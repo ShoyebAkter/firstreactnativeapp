@@ -5,12 +5,12 @@ import * as WebBrowser from 'expo-web-browser';
 
 WebBrowser.maybeCompleteAuthSession();
 
+
 const Social = () => {
     const [accessToken,setAccessToken]=useState<any>();
     const [userInfo,setUserInfo]=useState<any>();
     
     const [request,response,promptAsync]=Google.useAuthRequest({
-        androidClientId:"962289027598-2tmcskr14d0ooqqs975phao7tsd0fg70.apps.googleusercontent.com",
         iosClientId: "962289027598-2tmcskr14d0ooqqs975phao7tsd0fg70.apps.googleusercontent.com",
         expoClientId:"962289027598-2tmcskr14d0ooqqs975phao7tsd0fg70.apps.googleusercontent.com"
     })
@@ -18,6 +18,7 @@ const Social = () => {
     useEffect(()=>{
         if(response?.type==='success'){
             setAccessToken(response.authentication?.accessToken)
+            getUserData()
         }
     },[response])
 
@@ -27,11 +28,15 @@ const Social = () => {
         })
         userInfoResponse.json().then(data=>setUserInfo(data))
     }
+    // if(userInfo){
+    //  console.log(navigation)  
+    // }
     return (
         <View>
             <View style={styles.button}>
                 <Button
-                    onPress={() => {promptAsync({showInRecents:true})}}
+                    // onPress={()=>navigatio }
+                    // onPress={accessToken ? getUserData : () => {promptAsync({showInRecents:true})}}
                     title="Facebook Sign In"
                 />
             </View>
