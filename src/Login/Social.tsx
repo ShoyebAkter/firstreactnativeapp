@@ -2,13 +2,19 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import * as Google from 'expo-auth-session/providers/google'
 import * as WebBrowser from 'expo-web-browser';
+import { useNavigation } from '@react-navigation/native';
 
 WebBrowser.maybeCompleteAuthSession();
+type Nav = {
+    navigate: (value: string) => void;
+  }
 
 
 const Social = () => {
     const [accessToken,setAccessToken]=useState<any>();
     const [userInfo,setUserInfo]=useState<any>();
+    
+    const navigation = useNavigation<Nav>();
     
     const [request,response,promptAsync]=Google.useAuthRequest({
         iosClientId: "962289027598-2tmcskr14d0ooqqs975phao7tsd0fg70.apps.googleusercontent.com",
@@ -18,7 +24,7 @@ const Social = () => {
     useEffect(()=>{
         if(response?.type==='success'){
             setAccessToken(response.authentication?.accessToken)
-            getUserData()
+            // getUserData()
         }
     },[response])
 
@@ -26,18 +32,23 @@ const Social = () => {
         let userInfoResponse=await fetch('https://www.googleapis.com/userinfo/v2/me',{
             headers: { Authorization: `Bearer ${accessToken}`}
         })
-        userInfoResponse.json().then(data=>setUserInfo(data))
+        userInfoResponse.json().then(data=>{setUserInfo(data)
+        
+        })
     }
-    // if(userInfo){
-    //  console.log(navigation)  
-    // }
+    if(userInfo){
+        // navigation.navigate('home')
+        console.log(userInfo)
+    }
     return (
         <View>
             <View style={styles.button}>
                 <Button
-                    // onPress={()=>navigatio }
-                    // onPress={accessToken ? getUserData : () => {promptAsync({showInRecents:true})}}
-                    title="Facebook Sign In"
+                    // onPress={()=>navigation.navigate('home') }
+                    onPress={ () => {promptAsync({showInRecents:true})
+                    
+                }}
+                    title="Google Sign In"
                 />
             </View>
             {/* {error &&
