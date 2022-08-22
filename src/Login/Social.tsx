@@ -24,8 +24,9 @@ const Social = () => {
     useEffect(()=>{
         if(response?.type==='success'){
             setAccessToken(response.authentication?.accessToken)
-            // getUserData()
+            getUserData()
         }
+        
     },[response])
 
     const getUserData=async()=>{
@@ -37,8 +38,8 @@ const Social = () => {
         })
     }
     if(userInfo){
-        // navigation.navigate('home')
-        console.log(userInfo)
+        navigation.navigate('home')
+        // console.log(userInfo)
     }
     return (
         <View>
@@ -46,7 +47,7 @@ const Social = () => {
                 <Button
                     // onPress={()=>navigation.navigate('home') }
                     onPress={ () => {promptAsync({showInRecents:true})
-                    
+                
                 }}
                     title="Google Sign In"
                 />
