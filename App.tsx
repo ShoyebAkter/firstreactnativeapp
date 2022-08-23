@@ -4,25 +4,33 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUp from './src/Login/SignUp';
 import Login from './src/Login/Login';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
-import Social from './src/Login/Social';
-import { createRef, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+// import AsyncStorage from './node_modules/@react-native-community/async-storage'
 export default function App() {
   const Stack = createNativeStackNavigator();
-  
-
-
   return (
     <NavigationContainer >
       <Stack.Navigator initialRouteName='login'>
-        <Stack.Screen name="signup" component={SignUp} />
+        <Stack.Screen
+         name="signup"
+         options={{
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+         }}
+         component={SignUp} />
         <Stack.Screen name="home" component={Home}
           options={({ navigation }) => ({
+            headerStyle: {
+              backgroundColor: '#f4511e', //Set Header color
+            },
             headerRight: () => (
               <Button
+              // disabled={!user}
                 onPress={() => {
+                  
                   signOut(auth)
                   navigation.replace("login")
                   // console.log(navigation)
@@ -32,7 +40,14 @@ export default function App() {
               />
             )
           })} />
-        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen
+         name="login"
+         options={{
+          headerStyle: {
+            backgroundColor: '#f4511e', //Set Header color
+          },
+         }}
+         component={Login} />
         
         
       </Stack.Navigator>

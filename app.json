@@ -31,8 +31,8 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF",
-        "googleServicesFile": "./GoogleService-Info.plist"
+        "backgroundColor": "#FFFFFF"
+        
       }
     },
     "web": {

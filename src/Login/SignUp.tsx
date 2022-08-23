@@ -1,9 +1,11 @@
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { auth } from '../../firebase';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 
-const SignUp = ({ navigation }: any) => {
+
+
+const SignUp: FC = ({ navigation }: any) => {
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")

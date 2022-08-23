@@ -1,10 +1,10 @@
 import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { app, auth } from '../../firebase';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import Social from './Social';
 
-const Login = ({ navigation }: any) => {
+const Login: FC = ({ navigation }: any) => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [signInWithGoogle, Guser, Gloading] = useSignInWithGoogle(auth)
@@ -14,6 +14,7 @@ const Login = ({ navigation }: any) => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    // console.log(navigation.getState);
 
     const handleLogin = async (): Promise<void> => {
         // console.log(email, password)

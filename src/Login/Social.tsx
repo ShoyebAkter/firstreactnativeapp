@@ -1,18 +1,19 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import * as Google from 'expo-auth-session/providers/google'
 import * as WebBrowser from 'expo-web-browser';
 import { useNavigation } from '@react-navigation/native';
+import { IUserType } from '../../types/datatypes';
 
 WebBrowser.maybeCompleteAuthSession();
 type Nav = {
-    navigate: (value: string) => void;
+    replace: (value: string) => void;
   }
 
 
-const Social = () => {
-    const [accessToken,setAccessToken]=useState<any>();
-    const [userInfo,setUserInfo]=useState<any>();
+const Social: FC = () => {
+    const [accessToken,setAccessToken]=useState<string | undefined>('');
+    const [userInfo,setUserInfo]=useState<IUserType>();
     
     const navigation = useNavigation<Nav>();
     
@@ -29,18 +30,18 @@ const Social = () => {
         
     },[response])
 
-    const getUserData=async()=>{
+    const getUserData=async():Promise<void>=>{
         let userInfoResponse=await fetch('https://www.googleapis.com/userinfo/v2/me',{
             headers: { Authorization: `Bearer ${accessToken}`}
         })
         userInfoResponse.json().then(data=>{setUserInfo(data)
-        
+            navigation.replace('home')
         })
     }
-    if(userInfo){
-        navigation.navigate('home')
-        // console.log(userInfo)
-    }
+    // if(userInfo){
+        
+    //     // console.log(userInfo)
+    // }
     return (
         <View>
             <View style={styles.button}>
